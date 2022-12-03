@@ -1,17 +1,14 @@
 #!/usr/bin/julia
 const INPUT_FILE = ARGS[1]
-inputs = split(read(INPUT_FILE, String), "\n\n")
-function part_one(inputs)::Int
-    maximum([
-        sum(parse.(Int, split(elf_calories, "\n")))
-        for elf_calories ∈ inputs]
-    )
+const calories = split.(split(read(INPUT_FILE, String), "\n\n"))
+
+function part_one(calories)::Int
+    maximum(c -> sum(parse.(Int, c)), calories)
 end
-function part_two(inputs)::Int
-    sum(sort([
-        sum(parse.(Int, split(elf_calories, "\n")))
-        for elf_calories ∈ inputs]
-    )[end-2:end])
+
+function part_two(calories)::Int
+    sum(sort(map(c -> sum(parse.(Int, c)), calories))[end-2:end])
 end
-println("PART ONE: $(part_one(inputs))")
-println("PART TWO: $(part_two(inputs))")
+
+println("PART ONE: $(part_one(calories))")
+println("PART TWO: $(part_two(calories))")
