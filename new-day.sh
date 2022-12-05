@@ -11,7 +11,7 @@ cd $nextday
 touch sample.txt
 touch input.txt
 main=main.jl
-echo '#!/usr/bin/julia
+echo '#!/usr/bin/env julia
 const INPUT_FILE = ARGS[1]
 const inputs = map(eachline(INPUT_FILE)) do i
     throw("Not implemented")
