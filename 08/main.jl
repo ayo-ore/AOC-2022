@@ -19,9 +19,12 @@ function part_two(inputs)::Int
         i, j = Tuple(I)
         slices = [(i-1:-1:1, j), (i+1:N, j), (i, j-1:-1:1), (i, j+1:M)]
         dists = [findfirst(inputs[s...] .>= inputs[I]) for s ∈ slices]
-        prod(isnothing(d) ? length(inputs[s...]) : d for (s, d) ∈ zip(slices, dists))
+        prod(zip(slices, dists)) do (s,d)
+            isnothing(d) ? length(inputs[s...]) : d
+        end
     end
 end
+
 println("PART ONE: $(part_one(inputs))")
 println("PART TWO: $(part_two(inputs))")
 
